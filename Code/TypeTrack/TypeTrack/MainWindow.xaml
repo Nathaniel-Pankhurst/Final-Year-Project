@@ -21,9 +21,19 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Label FontWeight="Bold" FontFamily="Calibri" FontSize="16" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+        
+        <Label FontWeight="Bold" FontFamily="Calibri" FontSize="16" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7">
             TypeTrack
         </Label>
+        <Label Grid.Row="1" Grid.Column="1">Time Left:</Label>
+        <Label Name="TimeLabel" Grid.Row="1" Grid.Column="2"></Label>
+        <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" HorizontalContentAlignment="Right">Typing Speed:</Label>
+        <Label Name="SpeedLabel" Grid.Row="1" Grid.Column="5"></Label>
+
+        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5"></TextBlock>
+        
     </Grid>
 </Window>
