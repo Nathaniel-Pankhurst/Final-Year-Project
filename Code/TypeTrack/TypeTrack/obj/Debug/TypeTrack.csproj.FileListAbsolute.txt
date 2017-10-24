@@ -1,0 +1,15 @@
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\bin\Debug\TypeTrack.exe.config
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\bin\Debug\TypeTrack.exe
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\bin\Debug\TypeTrack.pdb
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\TypeTrack.csprojResolveAssemblyReference.cache
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\MainWindow.g.cs
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\App.g.cs
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\TypeTrack_MarkupCompile.cache
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\TypeTrack_MarkupCompile.lref
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\MainWindow.baml
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\TypeTrack.g.resources
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\TypeTrack.Properties.Resources.resources
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\TypeTrack.csproj.GenerateResource.Cache
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\TypeTrack.csproj.CoreCompileInputs.cache
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\TypeTrack.exe
+C:\Users\Mozzy\Documents\Final-Year-Project\Code\TypeTrack\TypeTrack\obj\Debug\TypeTrack.pdb
