@@ -33,7 +33,11 @@
         <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" HorizontalContentAlignment="Right">Typing Speed:</Label>
         <Label Name="SpeedLabel" Grid.Row="1" Grid.Column="5"></Label>
 
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5"></TextBlock>
+        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" BorderThickness="1px" BorderBrush="Black">
+            <TextBlock Name="SampleBlock"></TextBlock>
+        </Border>
+
+        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5"></TextBox>
 
     </Grid>
 </Window>
