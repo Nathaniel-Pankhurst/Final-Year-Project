@@ -14,6 +14,8 @@
             <RowDefinition Height="4*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -25,7 +27,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label FontWeight="Bold" FontFamily="Calibri" FontSize="16" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7">
+        <Label FontWeight="Bold" FontFamily="Calibri" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7">
             TypeTrack
         </Label>
         <Label Grid.Row="1" Grid.Column="1">Time Left:</Label>
@@ -33,11 +35,19 @@
         <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" HorizontalContentAlignment="Right">Typing Speed:</Label>
         <Label Name="SpeedLabel" Grid.Row="1" Grid.Column="5"></Label>
 
-        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" BorderThickness="1px" BorderBrush="Black">
+        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" BorderThickness="1px" BorderBrush="Black" CornerRadius="2" Margin="5">
             <TextBlock Name="SampleBlock"></TextBlock>
         </Border>
 
-        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="5" BorderBrush="Black">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
 
+        <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Margin="10">Start Test</Button>
+        <Button Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="5" Margin="10">Settings</Button>
     </Grid>
 </Window>
