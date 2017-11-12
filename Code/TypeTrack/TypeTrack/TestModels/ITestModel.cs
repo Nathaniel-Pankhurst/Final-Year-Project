@@ -16,10 +16,6 @@ namespace TypeTrack.TestModels
 
     public interface ITestModel
     {
-        string TestName { get; }
-        TestType TestType { get; }
-        int TestLength { get; set; }
-    
         Dictionary<uint, string> GetTest();
         KeyValuePair<uint, string> GetCurrentWord();
     }
