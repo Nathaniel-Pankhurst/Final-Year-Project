@@ -6,21 +6,37 @@ using System.Threading.Tasks;
 
 namespace TypeTrack.TestModels
 {
-    class UserModel : IUserModel
+    public class UserModel : IUserModel
     {
-        public int AddScore()
+        private string _userName;
+        private List<int> _scores;
+
+        public List<int> Scores
         {
-            throw new NotImplementedException();
+            get
+            {
+                return _scores;
+            }
+        }
+        public UserModel(string userName)
+        {
+            _userName = userName;
+            _scores = new List<int>();
+        }
+
+        public void AddScore(int score)
+        {
+            _scores.Add(score);
         }
 
         public int GetAverageScore()
         {
-            throw new NotImplementedException();
+            return _scores.Count > 0 ? Convert.ToInt32(_scores.Average()) : 0;
         }
 
         public int GetLatestScore()
         {
-            throw new NotImplementedException();
+            return _scores.Last();
         }
     }
 }

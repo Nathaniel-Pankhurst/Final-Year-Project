@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TypeTrack.TestModels
 {
-    interface IUserModel
+    public interface IUserModel
     {
         int GetAverageScore();
-        int AddScore();
         int GetLatestScore();
+        void AddScore(int score);
     }
 }
