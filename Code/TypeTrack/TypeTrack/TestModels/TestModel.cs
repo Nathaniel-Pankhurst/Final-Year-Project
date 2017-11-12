@@ -8,14 +8,38 @@ namespace TypeTrack.TestModels
 {
     public abstract class TestModel : ITestModel
     {
-        public KeyValuePair<uint, string> GetCurrentWord()
+        protected List<string> _test;
+        protected int _currentWord;
+
+        public TestModel(List<string> test)
         {
-            throw new NotImplementedException();
+            _test = new List<string>();
+            _currentWord = _test.IndexOf(_test.FirstOrDefault());
         }
 
-        public Dictionary<uint, string> GetTest()
+        public List<string> Test
         {
-            throw new NotImplementedException();
+            get
+            {
+                return _test;
+            }
+        }
+
+        public string GetCurrentWord()
+        {
+            return _test[_currentWord];
+        }
+
+        public string GetNextWord()
+        {
+            string nextWord = string.Empty;
+            if (_currentWord < _test.Count)
+            {
+                _currentWord += 1;
+                nextWord = GetCurrentWord();
+            }
+
+            return nextWord;
         }
     }
 }
