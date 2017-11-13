@@ -10,12 +10,7 @@ namespace TypeTrack.TestModels
     {
         protected List<string> _test;
         protected int _currentWord;
-
-        public TestModel(List<string> test)
-        {
-            _test = new List<string>();
-            _currentWord = _test.IndexOf(_test.FirstOrDefault());
-        }
+        protected TestType _testType;
 
         public List<string> Test
         {
@@ -24,6 +19,21 @@ namespace TypeTrack.TestModels
                 return _test;
             }
         }
+
+        public TestType TestType
+        {
+            get
+            {
+                return _testType;
+            }
+        }
+
+        public TestModel(List<string> test)
+        {
+            _test = new List<string>();
+            _currentWord = _test.IndexOf(_test.FirstOrDefault());
+        }
+
 
         public string GetCurrentWord()
         {
