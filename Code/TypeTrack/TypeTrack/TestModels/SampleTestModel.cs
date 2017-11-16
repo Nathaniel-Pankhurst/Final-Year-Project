@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace TypeTrack.TestModels
 {
-    public class RandomTestModel : TestModel
+    public class SampleTestModel : TestModel
     {
-        private RandomTestModel() : base(GenerateRandomText())
+        private SampleTestModel(List<string> test) : base(test)
         {
             _testType = TestType.Random;
-        }
-
-        private static List<string> GenerateRandomText()
-        {
-            return new List<string>();
         }
     }
 }
