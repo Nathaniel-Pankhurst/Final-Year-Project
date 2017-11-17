@@ -10,6 +10,14 @@ namespace TypeTrack.TestModels
     {
         private string _userName;
         private List<int> _scores;
+        
+        public string UserName
+        {
+            get
+            {
+                return _userName;
+            }
+        }
 
         public List<int> Scores
         {
