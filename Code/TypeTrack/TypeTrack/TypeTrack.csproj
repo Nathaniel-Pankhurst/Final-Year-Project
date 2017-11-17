@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="TestModels\ITestModel.cs" />
     <Compile Include="TestModels\IUserModel.cs" />
     <Compile Include="TestModels\SampleTestModel.cs" />
@@ -103,5 +104,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
