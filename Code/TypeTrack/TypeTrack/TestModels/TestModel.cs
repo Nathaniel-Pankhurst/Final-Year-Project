@@ -20,6 +20,14 @@ namespace TypeTrack.TestModels
             }
         }
 
+        public string SampleText
+        {
+            get
+            {
+                return string.Join(" ", _test);
+            }
+        }
+
         public TestType TestType
         {
             get
