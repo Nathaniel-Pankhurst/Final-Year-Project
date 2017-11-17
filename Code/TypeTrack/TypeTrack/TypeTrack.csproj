@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="TestModels\ITestModel.cs" />
     <Compile Include="TestModels\IUserModel.cs" />
+    <Compile Include="TestModels\SampleTestModel.cs" />
     <Compile Include="TestModels\RandomTestModel.cs" />
     <Compile Include="TestModels\TestModel.cs" />
     <Compile Include="TestModels\UserModel.cs" />

@@ -15,6 +15,7 @@ namespace TypeTrack.TestModels
 
         private static List<string> GenerateRandomText()
         {
+            // No current working method of generating random text
             return new List<string>();
         }
     }
