@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TypeTrack.Controllers;
 
 namespace TypeTrack
 {
@@ -20,9 +21,25 @@ namespace TypeTrack
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TestController _testController;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // Event Handlers
+            StartButton.Click += StartButton_Click;
+            SettingsButton.Click += SettingsButton_Click;
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Settings Currently not implemented");
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
