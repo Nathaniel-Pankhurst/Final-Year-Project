@@ -39,7 +39,7 @@ namespace TypeTrack
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Let's start a test!");
         }
     }
 }
