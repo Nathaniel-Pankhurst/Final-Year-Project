@@ -30,6 +30,8 @@ namespace TypeTrack
             // Event Handlers
             StartButton.Click += StartButton_Click;
             SettingsButton.Click += SettingsButton_Click;
+
+            _testController = new TestController();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
@@ -39,7 +41,7 @@ namespace TypeTrack
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Let's start a test!");
+            _testController.NewTest();
         }
     }
 }
