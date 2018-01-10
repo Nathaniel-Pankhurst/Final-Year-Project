@@ -12,6 +12,7 @@ namespace TypeTrack.Controllers
     {
         private ITestModel _testModel;
         private Stopwatch _testTimer;
+        private bool _testCompleted;
         private string _userEntryText;
         private int _completedWords;
         private TimeSpan _currentElapsedTime { get { return _testTimer.Elapsed; } }
@@ -20,25 +21,37 @@ namespace TypeTrack.Controllers
         {
             _testModel = new SampleTestModel(new List<string> {"This", "is", "a", "test", "string"});
             _testTimer = new Stopwatch();
+            _testCompleted = false;
+            _userEntryText = userEntryText;
             _completedWords = 0;
         }
 
         public void NewTest() // @TODO: Make this asynchronous
         {
+            _testCompleted = false;
             _completedWords = 0;
             _testTimer.Restart();
 
-            while (_testTimer.Elapsed < TimeSpan.FromSeconds(60))
+            while (!_testCompleted)
             {
-                if (_userEntryText == _testModel.GetCurrentWord())
+                if (_testTimer.Elapsed < TimeSpan.FromSeconds(60))
                 {
-                    ProgressWord();
+                    if (_userEntryText == _testModel.GetCurrentWord())
+                    {
+                        ProgressWord();
+                    }
+                    else
+                    {
+                        // Show errors on screen.
+                    }
                 }
                 else
                 {
-                    // Show errors on screen.
+                    // The user has run out of time, and the test has ended.
+                    TestEnded();
                 }
             }
+
         }
 
         private void ProgressWord()
@@ -46,11 +59,20 @@ namespace TypeTrack.Controllers
             if (!_testModel.IsLastWord())
             {
                 _testModel.GetNextWord();
+                _completedWords += 1;
             }
             else
             {
-                // End of test, lets finish up and hand over the score
+                // The user has typed all words from the sample text, and the test has ended.
+                TestEnded();
             }
+        }
+
+        private void TestEnded()
+        {
+            _testCompleted = true;
+            _testTimer.Stop();
+            int userWPM = _completedWords / ((int)_testTimer.Elapsed.TotalSeconds / 60); 
         }
     }
 }
