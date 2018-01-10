@@ -51,13 +51,24 @@ namespace TypeTrack.TestModels
         public string GetNextWord()
         {
             string nextWord = string.Empty;
-            if (_currentWord < _test.Count)
+            if (!IsLastWord())
             {
                 _currentWord += 1;
                 nextWord = GetCurrentWord();
             }
 
             return nextWord;
+        }
+
+        public bool IsLastWord()
+        {
+            bool endOfTest = true;
+            if(_currentWord !=_test.Count - 1)
+            {
+                endOfTest = false;
+            }
+
+            return endOfTest;
         }
     }
 }

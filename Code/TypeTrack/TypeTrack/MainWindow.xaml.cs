@@ -31,7 +31,7 @@ namespace TypeTrack
             StartButton.Click += StartButton_Click;
             SettingsButton.Click += SettingsButton_Click;
 
-            _testController = new TestController();
+            _testController = new TestController(this.EntryBox.Text);
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
