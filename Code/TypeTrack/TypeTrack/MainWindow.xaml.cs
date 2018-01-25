@@ -33,11 +33,23 @@ namespace TypeTrack
 
             _testController = new TestController(this.EntryBox.Text);
             _testController.NextWord += _testController_NextWord;
+            _testController.NewTest += _testController_NewTest;
         }
 
-        private void _testController_NextWord(object sender, NextWordEventArgs e)
+        private void _testController_NewTest(object sender, WordEventArgs e)
         {
-            
+            SetTestArea(e.RemainingWords);
+        }
+
+        private void _testController_NextWord(object sender, WordEventArgs e)
+        {
+            SetTestArea(e.RemainingWords);
+        }
+
+        private void SetTestArea(string testText)
+        {
+            SampleBlock.Text = testText;
+            EntryBox.Text = "";
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
@@ -47,7 +59,7 @@ namespace TypeTrack
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            _testController.NewTest();
+            _testController.StartNewTest();
         }
     }
 }

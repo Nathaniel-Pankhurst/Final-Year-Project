@@ -8,17 +8,18 @@ using TypeTrack.TestModels;
 
 namespace TypeTrack.Controllers
 {
-    public class NextWordEventArgs : EventArgs
+    public class WordEventArgs : EventArgs
     {
-        List<string> RemainingWords { get; set; }
+        public string RemainingWords { get; set; }
 
-        public NextWordEventArgs(List<string> remainingWords)
+        public WordEventArgs(string remainingWords)
         {
             RemainingWords = remainingWords;
         }
     }
 
-    public delegate void NextWordHandler(object sender, NextWordEventArgs e);
+    public delegate void NextWordHandler(object sender, WordEventArgs e);
+    public delegate void NewTestHandler(object sender, WordEventArgs e);
 
 
     class TestController
@@ -30,6 +31,7 @@ namespace TypeTrack.Controllers
         private int _completedWords;
         private TimeSpan _currentElapsedTime { get { return _testTimer.Elapsed; } }
         public event NextWordHandler NextWord;
+        public event NewTestHandler NewTest;
         
         public TestController(string userEntryText)
         {
@@ -40,11 +42,12 @@ namespace TypeTrack.Controllers
             _completedWords = 0;
         }
 
-        public void NewTest() // @TODO: Make this asynchronous
+        public void StartNewTest() // @TODO: Make this asynchronous
         {
             _testCompleted = false;
             _completedWords = 0;
             _testTimer.Restart();
+            NewTest.Invoke(this, new WordEventArgs(_testModel.GetRemainingWords()));
 
             while (!_testCompleted)
             {
@@ -75,7 +78,7 @@ namespace TypeTrack.Controllers
                 _userEntryText = string.Empty;
                 _testModel.GetNextWord();
                 _completedWords += 1;
-                NextWord.Invoke(this, new NextWordEventArgs(_testModel.GetRemainingWords()));
+                NextWord.Invoke(this, new WordEventArgs(_testModel.GetRemainingWords()));
             }
             else
             {
