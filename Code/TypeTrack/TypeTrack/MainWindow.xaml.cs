@@ -60,7 +60,7 @@ namespace TypeTrack
         private void SetTestArea(string testText)
         {
             SampleBlock.Text = testText;
-            EntryBox.Text = "";
+            EntryBox.Clear();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
