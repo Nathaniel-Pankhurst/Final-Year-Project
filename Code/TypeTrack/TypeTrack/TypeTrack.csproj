@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\ITestController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="TestModels\ITestModel.cs" />
     <Compile Include="TestModels\IUserModel.cs" />
