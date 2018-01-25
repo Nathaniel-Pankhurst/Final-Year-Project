@@ -8,6 +8,19 @@ using TypeTrack.TestModels;
 
 namespace TypeTrack.Controllers
 {
+    public class NextWordEventArgs : EventArgs
+    {
+        List<string> RemainingWords { get; set; }
+
+        public NextWordEventArgs(List<string> remainingWords)
+        {
+            RemainingWords = remainingWords;
+        }
+    }
+
+    public delegate void NextWordHandler(object sender, NextWordEventArgs e);
+
+
     class TestController
     {
         private ITestModel _testModel;
@@ -16,6 +29,7 @@ namespace TypeTrack.Controllers
         private string _userEntryText;
         private int _completedWords;
         private TimeSpan _currentElapsedTime { get { return _testTimer.Elapsed; } }
+        public event NextWordHandler NextWord;
         
         public TestController(string userEntryText)
         {
@@ -60,6 +74,7 @@ namespace TypeTrack.Controllers
             {
                 _testModel.GetNextWord();
                 _completedWords += 1;
+                NextWord.Invoke(this, new NextWordEventArgs(_testModel.GetRemainingWords()));
             }
             else
             {

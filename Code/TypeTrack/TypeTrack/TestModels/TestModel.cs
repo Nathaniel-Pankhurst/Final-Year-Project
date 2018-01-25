@@ -60,6 +60,11 @@ namespace TypeTrack.TestModels
             return nextWord;
         }
 
+        public List<string> GetRemainingWords()
+        {
+            return _test.GetRange(_currentWord, _test.Count - 1);
+        }
+
         public bool IsLastWord()
         {
             bool endOfTest = true;

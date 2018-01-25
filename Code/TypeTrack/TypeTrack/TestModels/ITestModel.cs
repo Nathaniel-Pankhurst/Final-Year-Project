@@ -18,6 +18,7 @@ namespace TypeTrack.TestModels
     {
         string GetCurrentWord();
         string GetNextWord();
+        List<string> GetRemainingWords();
         bool IsLastWord();
     }
 }
