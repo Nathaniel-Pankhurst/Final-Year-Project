@@ -8,28 +8,7 @@ using TypeTrack.TestModels;
 
 namespace TypeTrack.Controllers
 {
-    public class WordEventArgs : EventArgs
-    {
-        public string RemainingWords { get; set; }
-
-        public WordEventArgs(string remainingWords)
-        {
-            RemainingWords = remainingWords;
-        }
-    }
-
-    public class TestEndEventArgs : EventArgs
-    {
-        public int CompletedWords { get; set; }
-        public TimeSpan CompletedTime { get; set; }
-    }
-
-    public delegate void NextWordHandler(object sender, WordEventArgs e);
-    public delegate void NewTestHandler(object sender, WordEventArgs e);
-    public delegate void TestEndHandler(object sender, TestEndEventArgs e);
-
-
-    class TestController
+    class TestController : ITestController
     {
         private ITestModel _testModel;
         private Stopwatch _testTimer;

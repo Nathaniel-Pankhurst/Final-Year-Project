@@ -44,7 +44,14 @@ namespace TypeTrack.Controllers
 
     public class MistakeEventArgs : EventArgs
     {
+        public string CorrectSubstring { get; set; }
+        public string IncorrectSubstring { get; set; }
 
+        public MistakeEventArgs(string correctSubstring, string incorrectSubstring)
+        {
+            CorrectSubstring = correctSubstring;
+            IncorrectSubstring = incorrectSubstring;
+        }
     }
 
     public delegate void NextWordHandler(object sender, WordEventArgs e);
@@ -55,5 +62,7 @@ namespace TypeTrack.Controllers
 
     interface ITestController
     {
+        void StartNewTest();
+        void UserProgress();
     }
 }
