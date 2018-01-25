@@ -38,7 +38,7 @@ namespace TypeTrack.TestModels
 
         public TestModel(List<string> test)
         {
-            _test = new List<string>();
+            _test = test;
             _currentWord = _test.IndexOf(_test.FirstOrDefault());
         }
 
