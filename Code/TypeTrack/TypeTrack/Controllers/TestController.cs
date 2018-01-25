@@ -27,6 +27,7 @@ namespace TypeTrack.Controllers
         private ITestModel _testModel;
         private Stopwatch _testTimer;
         private bool _testCompleted;
+        private bool _userProgressing;
         private string _userEntryText;
         private int _completedWords;
         private TimeSpan _currentElapsedTime { get { return _testTimer.Elapsed; } }
@@ -40,6 +41,7 @@ namespace TypeTrack.Controllers
             _testCompleted = false;
             _userEntryText = userEntryText;
             _completedWords = 0;
+            _userProgressing = false;
         }
 
         public async void StartNewTest() // @TODO: Make this asynchronous
@@ -50,6 +52,11 @@ namespace TypeTrack.Controllers
             NewTest.Invoke(this, new WordEventArgs(_testModel.GetRemainingWords()));
 
             await Task.Run(async () => RunTest());
+        }
+
+        public void UserProgress()
+        {
+            _userProgressing = true;
         }
 
         private void ProgressWord()
@@ -81,13 +88,17 @@ namespace TypeTrack.Controllers
             {
                 if (_testTimer.Elapsed < TimeSpan.FromSeconds(60))
                 {
-                    if (_userEntryText == _testModel.GetCurrentWord())
+                    if (_userProgressing)
                     {
-                        ProgressWord();
-                    }
-                    else
-                    {
-                        // Show errors on screen.
+                        _userProgressing = false;
+                        if (_userEntryText == _testModel.GetCurrentWord())
+                        {
+                            ProgressWord();
+                        }
+                        else
+                        {
+                            // Show errors on screen.
+                        }
                     }
                 }
                 else

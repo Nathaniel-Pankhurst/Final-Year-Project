@@ -34,6 +34,17 @@ namespace TypeTrack
             _testController = new TestController(this.EntryBox.Text);
             _testController.NextWord += _testController_NextWord;
             _testController.NewTest += _testController_NewTest;
+
+            EntryBox.TextChanged += EntryBox_TextChanged;
+        }
+
+        private void EntryBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (EntryBox.Text.Last() == ' ')
+            {
+                EntryBox.Text = EntryBox.Text.Substring(EntryBox.Text.Length - 1);
+                _testController.UserProgress();
+            }
         }
 
         private void _testController_NewTest(object sender, WordEventArgs e)
