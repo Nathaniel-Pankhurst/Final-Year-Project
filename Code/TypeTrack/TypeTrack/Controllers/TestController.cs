@@ -72,6 +72,7 @@ namespace TypeTrack.Controllers
         {
             if (!_testModel.IsLastWord())
             {
+                _userEntryText = string.Empty;
                 _testModel.GetNextWord();
                 _completedWords += 1;
                 NextWord.Invoke(this, new NextWordEventArgs(_testModel.GetRemainingWords()));
