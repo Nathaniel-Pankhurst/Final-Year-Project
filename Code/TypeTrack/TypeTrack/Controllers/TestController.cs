@@ -42,33 +42,14 @@ namespace TypeTrack.Controllers
             _completedWords = 0;
         }
 
-        public void StartNewTest() // @TODO: Make this asynchronous
+        public async void StartNewTest() // @TODO: Make this asynchronous
         {
             _testCompleted = false;
             _completedWords = 0;
             _testTimer.Restart();
             NewTest.Invoke(this, new WordEventArgs(_testModel.GetRemainingWords()));
 
-            while (!_testCompleted)
-            {
-                if (_testTimer.Elapsed < TimeSpan.FromSeconds(60))
-                {
-                    if (_userEntryText == _testModel.GetCurrentWord())
-                    {
-                        ProgressWord();
-                    }
-                    else
-                    {
-                        // Show errors on screen.
-                    }
-                }
-                else
-                {
-                    // The user has run out of time, and the test has ended.
-                    TestEnded();
-                }
-            }
-
+            await Task.Run(async () => RunTest());
         }
 
         private void ProgressWord()
@@ -92,6 +73,29 @@ namespace TypeTrack.Controllers
             _testCompleted = true;
             _testTimer.Stop();
             int userWPM = _completedWords / ((int)_testTimer.Elapsed.TotalSeconds / 60); 
+        }
+
+        private void RunTest()
+        {
+            while (!_testCompleted)
+            {
+                if (_testTimer.Elapsed < TimeSpan.FromSeconds(60))
+                {
+                    if (_userEntryText == _testModel.GetCurrentWord())
+                    {
+                        ProgressWord();
+                    }
+                    else
+                    {
+                        // Show errors on screen.
+                    }
+                }
+                else
+                {
+                    // The user has run out of time, and the test has ended.
+                    TestEnded();
+                }
+            }
         }
     }
 }
