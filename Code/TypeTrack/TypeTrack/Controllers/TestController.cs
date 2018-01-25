@@ -65,7 +65,8 @@ namespace TypeTrack.Controllers
         {
             _testCompleted = true;
             _testTimer.Stop();
-            int userWPM = _completedWords / ((int)_testTimer.Elapsed.TotalSeconds / 60); 
+            int userWPM = GetWPM();
+
         }
 
         private void RunTest()
@@ -93,6 +94,11 @@ namespace TypeTrack.Controllers
                     TestEnded();
                 }
             }
+        }
+
+        private int GetWPM()
+        {
+            return _completedWords / ((int)_testTimer.Elapsed.TotalSeconds / 60);
         }
     }
 }
