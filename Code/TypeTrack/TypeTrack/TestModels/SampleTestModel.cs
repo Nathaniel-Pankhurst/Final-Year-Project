@@ -8,9 +8,9 @@ namespace TypeTrack.TestModels
 {
     public class SampleTestModel : TestModel
     {
-        private SampleTestModel(List<string> test) : base(test)
+        public SampleTestModel(List<string> test) : base(test)
         {
-            _testType = TestType.Random;
+            _testType = TestType.Sample;
         }
     }
 }
