@@ -30,7 +30,7 @@ namespace TypeTrack
             InitializeComponent();
 
             // Setup DispatchTimer Parameters
-            _uiUpdateTimer.Interval = TimeSpan.FromSeconds(0.5);
+            _uiUpdateTimer.Interval = TimeSpan.FromSeconds(0.1);
             _uiUpdateTimer.Tick += _uiUpdateTimer_Tick;
 
             // Event Handlers
