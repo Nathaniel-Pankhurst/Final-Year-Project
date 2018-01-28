@@ -8,7 +8,7 @@ using TypeTrack.TestModels;
 
 namespace TypeTrack.Controllers
 {
-    class TestController : ITestController
+    public class TestController : ITestController
     {
         private ITestModel _testModel;
         private Stopwatch _testTimer;
@@ -19,6 +19,8 @@ namespace TypeTrack.Controllers
         private TimeSpan _currentElapsedTime { get { return _testTimer.Elapsed; } }
         public event NextWordHandler NextWord;
         public event NewTestHandler NewTest;
+        public event TestEndHandler TestEnd;
+        public event MistakeHandler MistakeMade;
         
         public TestController(string userEntryText)
         {
@@ -66,7 +68,7 @@ namespace TypeTrack.Controllers
             _testCompleted = true;
             _testTimer.Stop();
             int userWPM = GetWPM();
-
+            TestEnd?.Invoke(this, new TestEndEventArgs(_completedWords, _testTimer.Elapsed, userWPM));
         }
 
         private void RunTest()
@@ -98,7 +100,13 @@ namespace TypeTrack.Controllers
 
         private int GetWPM()
         {
-            return _completedWords / ((int)_testTimer.Elapsed.TotalSeconds / 60);
+            int elapsedTime = (int)_testTimer.Elapsed.TotalSeconds / 60;
+            return _completedWords / (elapsedTime != 0 ? elapsedTime : 1);
+        }
+
+        public TestTelemetry GetCurrentTelemetry()
+        {
+            return new TestTelemetry(GetWPM(), _testTimer.Elapsed);
         }
     }
 }

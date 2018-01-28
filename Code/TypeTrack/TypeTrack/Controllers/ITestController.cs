@@ -42,12 +42,25 @@ namespace TypeTrack.Controllers
         }
     }
 
+    public class TestTelemetry
+    {
+        public int WPM { get; set; }
+        public TimeSpan ElapsedTime { get; set; }
+
+        public TestTelemetry(int wpm, TimeSpan elapsedTime)
+        {
+            WPM = wpm;
+            ElapsedTime = elapsedTime;
+        }
+    }
+
+
     public delegate void NextWordHandler(object sender, WordEventArgs e);
     public delegate void NewTestHandler(object sender, WordEventArgs e);
     public delegate void TestEndHandler(object sender, TestEndEventArgs e);
     public delegate void MistakeHandler(object sender, MistakeEventArgs e);
  
-    interface ITestController
+    public interface ITestController
     {
         void StartNewTest();
         void UserProgress();
