@@ -30,18 +30,6 @@ namespace TypeTrack.Controllers
         }
     }
 
-    public class ErrorEventArgs : EventArgs
-    {
-        public string ErrorString { get; set; }
-        public string ErrorTitle { get; set; }
-
-        public ErrorEventArgs(string errorString, string errorTitle)
-        {
-            ErrorString = errorString;
-            ErrorTitle = errorTitle;
-        }
-    }
-
     public class MistakeEventArgs : EventArgs
     {
         public string CorrectSubstring { get; set; }
@@ -57,9 +45,8 @@ namespace TypeTrack.Controllers
     public delegate void NextWordHandler(object sender, WordEventArgs e);
     public delegate void NewTestHandler(object sender, WordEventArgs e);
     public delegate void TestEndHandler(object sender, TestEndEventArgs e);
-    public delegate void ErrorHandler(object sender, ErrorEventArgs e);
     public delegate void MistakeHandler(object sender, MistakeEventArgs e);
-
+ 
     interface ITestController
     {
         void StartNewTest();
