@@ -63,7 +63,7 @@ namespace TypeTrack
 
         private void EntryBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (EntryBox.Text.Last() == ' ')
+            if ((!string.IsNullOrEmpty(EntryBox.Text)) && EntryBox.Text.Last() == ' ')
             {
                 EntryBox.Text = EntryBox.Text.Substring(EntryBox.Text.Length - 1);
                 _testController.UserProgress();
