@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,32 @@ namespace TypeTrack
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    public class UserContext
+    public class UserContext : INotifyPropertyChanged
     {
-        public string UserEntryString { get; set; }
+        private string _userEntryString;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string UserEntryString
+        {
+            get
+            {
+                return _userEntryString;
+            }
+            set
+            {
+                if(_userEntryString != value)
+                {
+                    _userEntryString = value;
+                    PropertyChanged?.BeginInvoke(this, new PropertyChangedEventArgs("UserEntryString"));
+                }
+            }
+        }
+
+        public UserContext()
+        {
+            _userEntryString = string.Empty;
+        }
     }
 
     public partial class MainWindow : Window
@@ -44,7 +68,7 @@ namespace TypeTrack
             StartButton.Click += StartButton_Click;
             SettingsButton.Click += SettingsButton_Click;
 
-            _testController = new TestController(userContext.UserEntryString    );
+            _testController = new TestController(((UserContext)DataContext).UserEntryString);
             _testController.NextWord += _testController_NextWord;
             _testController.NewTest += _testController_NewTest;
             _testController.TestEnd += _testController_TestEnd;
