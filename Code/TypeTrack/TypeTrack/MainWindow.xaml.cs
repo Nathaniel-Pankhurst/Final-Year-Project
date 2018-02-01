@@ -37,7 +37,7 @@ namespace TypeTrack
             StartButton.Click += StartButton_Click;
             SettingsButton.Click += SettingsButton_Click;
 
-            _testController = new TestController(this.EntryBox.Text);
+            _testController = new TestController();
             _testController.NextWord += _testController_NextWord;
             _testController.NewTest += _testController_NewTest;
             _testController.TestEnd += _testController_TestEnd;
@@ -65,8 +65,11 @@ namespace TypeTrack
         {
             if (EntryBox.Text.Last() == ' ')
             {
-                EntryBox.Text = EntryBox.Text.Substring(EntryBox.Text.Length - 1);
-                _testController.UserProgress();
+                string userEntryString = EntryBox.Text.Substring(EntryBox.Text.Length - 1);
+                if (!string.IsNullOrEmpty(userEntryString))
+                {
+                    _testController.UserProgress(userEntryString);
+                }
             }
         }
 

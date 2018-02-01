@@ -63,6 +63,6 @@ namespace TypeTrack.Controllers
     public interface ITestController
     {
         void StartNewTest();
-        void UserProgress();
+        void UserProgress(string entryText);
     }
 }
