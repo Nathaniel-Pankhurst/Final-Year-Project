@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;    
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using TypeTrack.Controllers;
 
@@ -21,16 +20,22 @@ namespace TypeTrack
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    public class UserContext
+    {
+        public string UserEntryString { get; set; }
+    }
+
     public partial class MainWindow : Window
     {
         private TestController _testController;
         private DispatcherTimer _uiUpdateTimer = new DispatcherTimer();
-
+        
         public MainWindow()
         {
             InitializeComponent();
-            TestGrid.DataContext = new UserEntryContext();
-
+            var userContext =  new UserContext();
+            DataContext = userContext;
             // Setup DispatchTimer Parameters
             _uiUpdateTimer.Interval = TimeSpan.FromSeconds(0.1);
             _uiUpdateTimer.Tick += _uiUpdateTimer_Tick;
@@ -39,7 +44,7 @@ namespace TypeTrack
             StartButton.Click += StartButton_Click;
             SettingsButton.Click += SettingsButton_Click;
 
-            _testController = new TestController(this.EntryBox.Text);
+            _testController = new TestController(userContext.UserEntryString    );
             _testController.NextWord += _testController_NextWord;
             _testController.NewTest += _testController_NewTest;
             _testController.TestEnd += _testController_TestEnd;
@@ -65,7 +70,7 @@ namespace TypeTrack
 
         private void EntryBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (EntryBox.Text.Last() == ' ')
+            if ((!string.IsNullOrEmpty(EntryBox.Text)) && EntryBox.Text.Last() == ' ')
             {
                 EntryBox.Text = EntryBox.Text.Substring(EntryBox.Text.Length - 1);
                 _testController.UserProgress();
@@ -97,35 +102,6 @@ namespace TypeTrack
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             _testController.StartNewTest();
-        }
-    }
-
-    public class UserEntryContext : INotifyPropertyChanged
-    {
-        private string _userEntry;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public string UserEntry
-        {
-            get
-            {
-                return _userEntry;
-            }
-            set
-            {
-                if (_userEntry != value)
-                {
-                    _userEntry = value;
-
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("UserEntry"));
-                }
-            }
-        }
-
-        public UserEntryContext()
-        {
-            UserEntry = string.Empty; 
         }
     }
 }
