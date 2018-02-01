@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TypeTrack"
         mc:Ignorable="d"
         Title="TypeTrack" Height="350" Width="525">
-    <Grid>
+    <Grid Name="TestGrid">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
@@ -39,7 +39,7 @@
             <TextBlock Name="SampleBlock"></TextBlock>
         </Border>
 
-        <TextBox Name="EntryBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="5" BorderBrush="Black">
+        <TextBox Name="EntryBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="5" BorderBrush="Black" Text="{Binding ElementName=TestGrid, Path=DataContext.UserEntry, Mode=TwoWay}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="2"/>

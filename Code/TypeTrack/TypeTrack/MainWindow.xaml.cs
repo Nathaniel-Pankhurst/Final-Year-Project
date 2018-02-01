@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Shapes;    
 using TypeTrack.Controllers;
 
 namespace TypeTrack
@@ -26,6 +27,7 @@ namespace TypeTrack
         public MainWindow()
         {
             InitializeComponent();
+            TestGrid.DataContext = new UserEntryContext();
 
             // Event Handlers
             StartButton.Click += StartButton_Click;
@@ -71,6 +73,35 @@ namespace TypeTrack
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             _testController.StartNewTest();
+        }
+    }
+
+    public class UserEntryContext : INotifyPropertyChanged
+    {
+        private string _userEntry;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string UserEntry
+        {
+            get
+            {
+                return _userEntry;
+            }
+            set
+            {
+                if (_userEntry != value)
+                {
+                    _userEntry = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("UserEntry"));
+                }
+            }
+        }
+
+        public UserEntryContext()
+        {
+            UserEntry = string.Empty; 
         }
     }
 }
