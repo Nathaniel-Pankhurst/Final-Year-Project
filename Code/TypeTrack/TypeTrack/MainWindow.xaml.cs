@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Tobii.Interaction.Wpf;
 using TypeTrack.Controllers;
 
 namespace TypeTrack
@@ -24,6 +25,7 @@ namespace TypeTrack
     {
         private TestController _testController;
         private DispatcherTimer _uiUpdateTimer = new DispatcherTimer();
+        private WpfInteractorAgent _wpfInteractorAgent;
 
         public MainWindow()
         {
