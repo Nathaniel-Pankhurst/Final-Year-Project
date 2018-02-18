@@ -3,11 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tobii="clr-namespace:Tobii.Interaction.Wpf;assembly=Tobii.Interaction.Net"
         xmlns:local="clr-namespace:TypeTrack"
         mc:Ignorable="d"
         Title="TypeTrack" Height="350" Width="525">
-    <Grid>
+    <Grid x:Name="FocusGrid" tobii:Behaviors.IsGazeAware="True">
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Setter Property="Background" Value="White" />
 
+                <Style.Triggers>
+                    <Trigger Property="tobii:Behaviors.HasGaze" Value="False">
+                        <Setter Property="Background" Value="Red" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
@@ -36,7 +47,9 @@
         <Label Name="SpeedLabel" Grid.Row="1" Grid.Column="5"></Label>
 
         <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" BorderThickness="1px" BorderBrush="Black" CornerRadius="2" Margin="5">
-            <TextBlock Name="SampleBlock"></TextBlock>
+            <TextBlock Name="SampleBlock">
+
+            </TextBlock>
         </Border>
 
         <TextBox Name="EntryBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="5" BorderBrush="Black">
