@@ -24,15 +24,15 @@ namespace TypeTrack
     public partial class MainWindow : Window
     {
         private TestController _testController;
-        private DispatcherTimer _uiUpdateTimer = new DispatcherTimer();
+        private DispatcherTimer _UpdateTimer = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
 
             // Setup DispatchTimer Parameters
-            _uiUpdateTimer.Interval = TimeSpan.FromSeconds(0.1);
-            _uiUpdateTimer.Tick += _uiUpdateTimer_Tick;
+            _UpdateTimer.Interval = TimeSpan.FromSeconds(0.1);
+            _UpdateTimer.Tick += _uiUpdateTimer_Tick;
 
             // Event Handlers
             StartButton.Click += StartButton_Click;
@@ -48,7 +48,7 @@ namespace TypeTrack
 
         private void _testController_TestEnd(object sender, TestEndEventArgs e)
         {
-            _uiUpdateTimer.Stop();
+            _UpdateTimer.Stop();
             Dispatcher.Invoke(()=>{
                 SetTestArea(string.Empty);
                 TimeLabel.Content = "0:0";
@@ -74,7 +74,7 @@ namespace TypeTrack
         private void _testController_NewTest(object sender, WordEventArgs e)
         {
             SetTestArea(e.RemainingWords);
-            _uiUpdateTimer.Start();
+            _UpdateTimer.Start();
         }
 
         private void _testController_NextWord(object sender, WordEventArgs e)
