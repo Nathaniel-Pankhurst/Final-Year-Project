@@ -25,6 +25,7 @@ namespace TypeTrack
     {
         private TestController _testController;
         private DispatcherTimer _UpdateTimer = new DispatcherTimer();
+        private string _testString = string.Empty;
 
         public MainWindow()
         {
@@ -58,6 +59,7 @@ namespace TypeTrack
         private void _uiUpdateTimer_Tick(object sender, EventArgs e)
         {
             TestTelemetry testTelemetry = _testController.GetCurrentTelemetry();
+            SetTestArea(_testString);
             SpeedLabel.Content = string.Format("{0} WPM", testTelemetry.WPM);
             TimeLabel.Content = string.Format("{0}:{1}", testTelemetry.ElapsedTime.Minutes, testTelemetry.ElapsedTime.Seconds);
         }
@@ -88,13 +90,13 @@ namespace TypeTrack
 
         private void _testController_NewTest(object sender, WordEventArgs e)
         {
-            SetTestArea(e.RemainingWords);
+            _testString = e.RemainingWords;
             _UpdateTimer.Start();
         }
 
         private void _testController_NextWord(object sender, WordEventArgs e)
         {
-            SetTestArea(e.RemainingWords);
+            _testString = e.RemainingWords;
         }
 
         private void SetTestArea(string testText)
