@@ -38,7 +38,7 @@ namespace TypeTrack
             StartButton.Click += StartButton_Click;
             SettingsButton.Click += SettingsButton_Click;
 
-            _testController = new TestController(this.EntryBox.Text);
+            _testController = new TestController();
             _testController.NextWord += _testController_NextWord;
             _testController.NewTest += _testController_NewTest;
             _testController.TestEnd += _testController_TestEnd;
@@ -64,9 +64,19 @@ namespace TypeTrack
 
         private void EntryBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if ((!string.IsNullOrEmpty(EntryBox.Text)) && EntryBox.Text.Last() == ' ')
+            bool userProgress = false;
+            if ((!string.IsNullOrEmpty(EntryBox.Text)) )
             {
-                EntryBox.Text = EntryBox.Text.Substring(EntryBox.Text.Length - 1);
+                if (EntryBox.Text.Last() == ' ')
+                { 
+                    EntryBox.Text = EntryBox.Text.Substring(EntryBox.Text.Length - 1);
+                    userProgress = true;
+                }
+                _testController.UpdateUserEntryText(EntryBox.Text);
+            }
+
+            if (userProgress)
+            {
                 _testController.UserProgress();
             }
         }

@@ -22,12 +22,12 @@ namespace TypeTrack.Controllers
         public event TestEndHandler TestEnd;
         public event MistakeHandler MistakeMade;
         
-        public TestController(string userEntryText)
+        public TestController()
         {
             _testModel = new SampleTestModel(new List<string> {"This", "is", "a", "test", "string"});
             _testTimer = new Stopwatch();
             _testCompleted = false;
-            _userEntryText = userEntryText;
+            _userEntryText = string.Empty;
             _completedWords = 0;
             _userProgressing = false;
         }
@@ -96,6 +96,11 @@ namespace TypeTrack.Controllers
                     TestEnded();
                 }
             }
+        }
+
+        public void UpdateUserEntryText(string newEntryText)
+        {
+            _userEntryText = newEntryText;
         }
 
         private int GetWPM()
