@@ -97,6 +97,7 @@ namespace TypeTrack
         private void _testController_NextWord(object sender, WordEventArgs e)
         {
             _testString = e.RemainingWords;
+            EntryBox.Clear();
         }
 
         private void SetTestArea(string testText)
