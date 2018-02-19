@@ -16,6 +16,7 @@ namespace TypeTrack.TestModels
 
     public interface ITestModel
     {
+        void StartNewTest();
         string GetCurrentWord();
         string GetNextWord();
         string GetRemainingWords();

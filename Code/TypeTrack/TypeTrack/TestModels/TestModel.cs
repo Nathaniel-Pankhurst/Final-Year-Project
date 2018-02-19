@@ -62,7 +62,7 @@ namespace TypeTrack.TestModels
 
         public string GetRemainingWords()
         {
-            return string.Join(" ", _test.GetRange(_currentWord, _test.Count - 1));
+            return string.Join(" ", _test.GetRange(_currentWord, _test.Count - _currentWord));
         }
 
         public bool IsLastWord()
@@ -74,6 +74,11 @@ namespace TypeTrack.TestModels
             }
 
             return endOfTest;
+        }
+
+        public void StartNewTest()
+        {
+            _currentWord = 0;
         }
     }
 }

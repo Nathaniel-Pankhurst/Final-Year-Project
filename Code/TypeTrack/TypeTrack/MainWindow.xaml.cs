@@ -24,33 +24,43 @@ namespace TypeTrack
     public partial class MainWindow : Window
     {
         private TestController _testController;
-        private DispatcherTimer _uiUpdateTimer = new DispatcherTimer();
+        private DispatcherTimer _UpdateTimer = new DispatcherTimer();
+        private string _testString = string.Empty;
+        private bool _clearEntryBox = false;
+        private bool _mistakeMade = false;
 
         public MainWindow()
         {
             InitializeComponent();
 
             // Setup DispatchTimer Parameters
-            _uiUpdateTimer.Interval = TimeSpan.FromSeconds(0.1);
-            _uiUpdateTimer.Tick += _uiUpdateTimer_Tick;
+            _UpdateTimer.Interval = TimeSpan.FromSeconds(0.1);
+            _UpdateTimer.Tick += _uiUpdateTimer_Tick;
 
             // Event Handlers
             StartButton.Click += StartButton_Click;
             SettingsButton.Click += SettingsButton_Click;
 
-            _testController = new TestController(this.EntryBox.Text);
+            _testController = new TestController();
             _testController.NextWord += _testController_NextWord;
             _testController.NewTest += _testController_NewTest;
             _testController.TestEnd += _testController_TestEnd;
+            _testController.MistakeMade += _testController_MistakeMade;
 
             EntryBox.TextChanged += EntryBox_TextChanged;
         }
 
+        private void _testController_MistakeMade(object sender, MistakeEventArgs e)
+        {
+            _mistakeMade = true;
+        }
+
         private void _testController_TestEnd(object sender, TestEndEventArgs e)
         {
-            _uiUpdateTimer.Stop();
+            _UpdateTimer.Stop();
             Dispatcher.Invoke(()=>{
                 SetTestArea(string.Empty);
+                EntryBox.Clear();
                 TimeLabel.Content = "0:0";
             }); 
         }
@@ -58,34 +68,62 @@ namespace TypeTrack
         private void _uiUpdateTimer_Tick(object sender, EventArgs e)
         {
             TestTelemetry testTelemetry = _testController.GetCurrentTelemetry();
+            SetTestArea(_testString);
+
+            if (_clearEntryBox)
+            {
+                EntryBox.Clear();
+                _clearEntryBox = false;
+            }
+            if (_mistakeMade)
+            {
+                EntryBox.SelectionStart = EntryBox.Text.Length;
+                EntryBox.SelectionLength = 0;
+                _mistakeMade = false;
+            }
+
             SpeedLabel.Content = string.Format("{0} WPM", testTelemetry.WPM);
             TimeLabel.Content = string.Format("{0}:{1}", testTelemetry.ElapsedTime.Minutes, testTelemetry.ElapsedTime.Seconds);
         }
 
         private void EntryBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if ((!string.IsNullOrEmpty(EntryBox.Text)) && EntryBox.Text.Last() == ' ')
+            bool userProgress = false;
+            if ((!string.IsNullOrEmpty(EntryBox.Text)) )
             {
-                EntryBox.Text = EntryBox.Text.Substring(EntryBox.Text.Length - 1);
+                if (EntryBox.Text.Last() == ' ')
+                {
+                    EntryBox.Text = EntryBox.Text.Remove(EntryBox.Text.Length - 1);
+                    userProgress = true;
+                }
+                else
+                {
+                    EntryBox.Text = EntryBox.Text;
+                }
+                _testController.UpdateUserEntryText(EntryBox.Text);
+            }
+
+            if (userProgress)
+            {
                 _testController.UserProgress();
             }
         }
 
         private void _testController_NewTest(object sender, WordEventArgs e)
         {
-            SetTestArea(e.RemainingWords);
-            _uiUpdateTimer.Start();
+            _testString = e.RemainingWords;
+            _UpdateTimer.Start();
         }
 
         private void _testController_NextWord(object sender, WordEventArgs e)
         {
-            SetTestArea(e.RemainingWords);
+            _testString = e.RemainingWords;
+            _clearEntryBox = true;
         }
 
         private void SetTestArea(string testText)
         {
             SampleBlock.Text = testText;
-            EntryBox.Clear();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
