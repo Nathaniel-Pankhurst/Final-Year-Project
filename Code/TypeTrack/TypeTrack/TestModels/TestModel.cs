@@ -75,5 +75,10 @@ namespace TypeTrack.TestModels
 
             return endOfTest;
         }
+
+        public void StartNewTest()
+        {
+            _currentWord = 0;
+        }
     }
 }

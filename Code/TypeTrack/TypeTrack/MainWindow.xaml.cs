@@ -70,17 +70,16 @@ namespace TypeTrack
             bool userProgress = false;
             if ((!string.IsNullOrEmpty(EntryBox.Text)) )
             {
-                string entryText;
                 if (EntryBox.Text.Last() == ' ')
                 {
-                    entryText = EntryBox.Text.Remove(EntryBox.Text.Length - 1);
+                    EntryBox.Text = EntryBox.Text.Remove(EntryBox.Text.Length - 1);
                     userProgress = true;
                 }
                 else
                 {
-                    entryText = EntryBox.Text;
+                    EntryBox.Text = EntryBox.Text;
                 }
-                _testController.UpdateUserEntryText(entryText);
+                _testController.UpdateUserEntryText(EntryBox.Text);
             }
 
             if (userProgress)
