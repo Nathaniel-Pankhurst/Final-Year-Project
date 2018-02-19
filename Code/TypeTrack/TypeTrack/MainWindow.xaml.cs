@@ -52,6 +52,7 @@ namespace TypeTrack
             _UpdateTimer.Stop();
             Dispatcher.Invoke(()=>{
                 SetTestArea(string.Empty);
+                EntryBox.Clear();
                 TimeLabel.Content = "0:0";
             }); 
         }
@@ -102,7 +103,6 @@ namespace TypeTrack
         private void SetTestArea(string testText)
         {
             SampleBlock.Text = testText;
-            EntryBox.Clear();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
