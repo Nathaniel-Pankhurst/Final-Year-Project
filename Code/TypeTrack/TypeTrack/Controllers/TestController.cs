@@ -87,7 +87,7 @@ namespace TypeTrack.Controllers
                         }
                         else
                         {
-                            // Show errors on screen.
+                            MistakeMade?.Invoke(this, new MistakeEventArgs(string.Empty, string.Empty)); // @TODO: Fix this so that it actually displays errors
                         }
                     }
                 }

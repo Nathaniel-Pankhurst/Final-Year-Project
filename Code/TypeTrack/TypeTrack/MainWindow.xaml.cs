@@ -26,6 +26,7 @@ namespace TypeTrack
         private TestController _testController;
         private DispatcherTimer _UpdateTimer = new DispatcherTimer();
         private string _testString = string.Empty;
+        private bool _clearEntryBox = false;
 
         public MainWindow()
         {
@@ -43,8 +44,15 @@ namespace TypeTrack
             _testController.NextWord += _testController_NextWord;
             _testController.NewTest += _testController_NewTest;
             _testController.TestEnd += _testController_TestEnd;
+            _testController.MistakeMade += _testController_MistakeMade;
 
             EntryBox.TextChanged += EntryBox_TextChanged;
+        }
+
+        private void _testController_MistakeMade(object sender, MistakeEventArgs e)
+        {
+            EntryBox.SelectionStart = EntryBox.Text.Length - 1;
+            EntryBox.SelectionLength = 0;
         }
 
         private void _testController_TestEnd(object sender, TestEndEventArgs e)
@@ -61,6 +69,11 @@ namespace TypeTrack
         {
             TestTelemetry testTelemetry = _testController.GetCurrentTelemetry();
             SetTestArea(_testString);
+            if (_clearEntryBox)
+            {
+                EntryBox.Clear();
+                _clearEntryBox = false;
+            }
             SpeedLabel.Content = string.Format("{0} WPM", testTelemetry.WPM);
             TimeLabel.Content = string.Format("{0}:{1}", testTelemetry.ElapsedTime.Minutes, testTelemetry.ElapsedTime.Seconds);
         }
@@ -97,7 +110,7 @@ namespace TypeTrack
         private void _testController_NextWord(object sender, WordEventArgs e)
         {
             _testString = e.RemainingWords;
-            EntryBox.Clear();
+            _clearEntryBox = true;
         }
 
         private void SetTestArea(string testText)
