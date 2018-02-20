@@ -24,7 +24,7 @@ namespace TypeTrack.Controllers
         
         public TestController()
         {
-            _testModel = new SampleTestModel(new List<string> {"This", "is", "a", "test", "string"});
+            _testModel = new SampleTestModel(new List<string> {"The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dogs"});
             _testTimer = new Stopwatch();
             _testCompleted = false;
             _userEntryText = string.Empty;
