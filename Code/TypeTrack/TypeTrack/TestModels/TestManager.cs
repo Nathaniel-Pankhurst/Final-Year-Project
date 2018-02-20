@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace TypeTrack.TestModels
 {
@@ -58,7 +59,10 @@ namespace TypeTrack.TestModels
 
         public void RefreshTestLIst()
         {
+            DirectoryInfo dInfo = new DirectoryInfo(@"\\SampleTexts");
+            FileInfo[] files = dInfo.GetFiles("*.json");
 
+            _testLocations = files.Select(p => p.Name).ToList();
         }
     }
 }
