@@ -116,16 +116,15 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="TestModels\SampleTexts\DefaultTexts\PSA.md" />
+    <None Include="TestModels\SampleTexts\UserTexts\PSA.md" />
     <None Include="Tobii\API-Reference.pdf" />
     <None Include="Tobii\SDK-License.pdf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TestModels\SampleTexts\DefaultTexts\" />
-    <Folder Include="TestModels\SampleTexts\UserTexts\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Tobii.Interaction.0.7.3\build\Tobii.Interaction.targets" Condition="Exists('..\packages\Tobii.Interaction.0.7.3\build\Tobii.Interaction.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
