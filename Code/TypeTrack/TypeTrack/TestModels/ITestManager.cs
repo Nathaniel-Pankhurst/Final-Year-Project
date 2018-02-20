@@ -15,5 +15,6 @@ namespace TypeTrack.TestModels
         bool IsLastWord();
         void RepeatTest();
         void StartNewTest(string fileName = "");
+        void RefreshTestList();
     }
 }
