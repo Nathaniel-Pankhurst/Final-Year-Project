@@ -8,38 +8,51 @@ namespace TypeTrack.TestModels
 {
     class TestManager : ITestManager
     {
-        public TestManager()
+        private TestModel _testModel;
+        private List<string> _testLocations;
+
+        public TestManager() // @TODO: Need to edit this so that it allows the user to pre=load a test. 
         {
         }
 
-        public string AdvanceWord()
+        public void AdvanceWord()
         {
-            throw new NotImplementedException();
+            _testModel.GetNextWord();
         }
 
         public string GetCurrentWord()
         {
-            throw new NotImplementedException();
+            return _testModel.GetCurrentWord();
         }
 
         public string GetSampleText()
         {
-            throw new NotImplementedException();
+            return _testModel.SampleText;
         }
 
-        public string IsLastWord()
+        public bool IsLastWord()
         {
-            throw new NotImplementedException();
+            return _testModel.IsLastWord();
         }
 
         public void RepeatTest()
         {
-            throw new NotImplementedException();
+            if (_testModel != null)
+            {
+                _testModel.StartNewTest();
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
         }
 
-        public void StartNewTest()
+        public void StartNewTest(string fileName = "")
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                _testModel = 
+            }
         }
     }
 }
