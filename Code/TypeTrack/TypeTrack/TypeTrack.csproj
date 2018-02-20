@@ -73,6 +73,7 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\ITestController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="TestModels\ITestManager.cs" />
     <Compile Include="TestModels\ITestModel.cs" />
     <Compile Include="TestModels\IUserModel.cs" />
     <Compile Include="TestModels\SampleTestModel.cs" />
