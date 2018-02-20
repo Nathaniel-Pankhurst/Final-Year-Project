@@ -53,11 +53,11 @@ namespace TypeTrack.TestModels
         {
             if (!string.IsNullOrEmpty(fileName))
             {
-                //_testModel = 
+                //_testModel =
             }
         }
 
-        public void RefreshTestLIst()
+        public void RefreshTestList()
         {
             DirectoryInfo dInfo = new DirectoryInfo(@"\\SampleTexts");
             FileInfo[] files = dInfo.GetFiles("*.json");
