@@ -73,7 +73,7 @@ namespace TypeTrack.TestModels
             StreamReader file = File.OpenText(fileLocation);
             JsonTextReader jsonFile = new JsonTextReader(file);
             JObject testObject = (JObject)JToken.ReadFrom(jsonFile);
-            testModel = new TestModel(testObject);
+            testModel = new SampleTestModel(testObject);
 
             return found;
         }

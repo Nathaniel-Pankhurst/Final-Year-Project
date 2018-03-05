@@ -9,9 +9,18 @@ namespace TypeTrack.TestModels
 {
     public abstract class TestModel : ITestModel
     {
+        protected string _testName;
         protected List<string> _test;
         protected int _currentWord;
         protected TestType _testType;
+
+        public string TestName
+        {
+            get
+            {
+                return _testName;
+            }
+        }
 
         public List<string> Test
         {
@@ -43,9 +52,9 @@ namespace TypeTrack.TestModels
             _currentWord = _test.IndexOf(_test.FirstOrDefault());
         }
 
-        public TestModel(JObject testObject) // construct a structure for the json file, and constructor
+        public TestModel(JObject testObject)
         {
-
+            _testType = (TestType)Enum.Parse(typeof(TestType), (string)testObject["TestType"]);
         }
 
 

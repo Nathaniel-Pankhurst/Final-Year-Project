@@ -118,6 +118,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="TestModels\SampleTexts\DefaultTexts\Fox_Pangram.json" />
     <None Include="TestModels\SampleTexts\DefaultTexts\PSA.md" />
     <None Include="TestModels\SampleTexts\UserTexts\PSA.md" />
     <None Include="Tobii\API-Reference.pdf" />
