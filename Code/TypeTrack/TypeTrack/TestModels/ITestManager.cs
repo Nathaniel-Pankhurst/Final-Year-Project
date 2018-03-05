@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace TypeTrack.TestModels
 {
-    interface ITestManager
+    public interface ITestManager
     {
         void AdvanceWord();
         string GetCurrentWord();

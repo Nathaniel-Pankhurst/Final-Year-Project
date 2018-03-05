@@ -11,6 +11,7 @@ namespace TypeTrack.Controllers
     public class TestController : ITestController
     {
         private ITestModel _testModel;
+        private ITestManager _testManager;
         private Stopwatch _testTimer;
         private bool _testCompleted;
         private bool _userProgressing;
@@ -22,8 +23,9 @@ namespace TypeTrack.Controllers
         public event TestEndHandler TestEnd;
         public event MistakeHandler MistakeMade;
         
-        public TestController()
+        public TestController(ITestManager testManager)
         {
+            _testManager = testManager;
             _testModel = new SampleTestModel(new List<string> {"The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dogs"});
             _testTimer = new Stopwatch();
             _testCompleted = false;
