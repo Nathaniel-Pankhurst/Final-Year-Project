@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.IO;
 
 namespace TypeTrack.TestModels
@@ -12,8 +13,9 @@ namespace TypeTrack.TestModels
     {
         private TestModel _testModel;
         private List<string> _testLocations;
+        private DirectoryInfo _dInfo = new DirectoryInfo(@"\\SampleTexts");
 
-        public TestManager() // @TODO: Need to edit this so that it allows the user to pre=load a test. 
+        public TestManager() // @TODO: Need to edit this so that it allows the user to pre-load a test. 
         {
         }
 
@@ -29,7 +31,7 @@ namespace TypeTrack.TestModels
 
         public string GetSampleText()
         {
-            return _testModel.SampleText;
+            return _testModel.SampleText; 
         }
 
         public bool IsLastWord()
@@ -58,11 +60,22 @@ namespace TypeTrack.TestModels
         }
 
         public void RefreshTestList()
-        {
-            DirectoryInfo dInfo = new DirectoryInfo(@"\\SampleTexts");
-            FileInfo[] files = dInfo.GetFiles("*.json");
+        { 
+            FileInfo[] files = _dInfo.GetFiles("*.json");
 
             _testLocations = files.Select(p => p.Name).ToList();
+        }
+
+        private bool TryGetTestModel(string fileLocation, out TestModel testModel)
+        {
+            bool found = false;
+
+            StreamReader file = File.OpenText(fileLocation);
+            JsonTextReader jsonFile = new JsonTextReader(file);
+            JObject testObject = (JObject)JToken.ReadFrom(jsonFile);
+            testModel = new TestModel(testObject);
+
+            return found;
         }
     }
 }

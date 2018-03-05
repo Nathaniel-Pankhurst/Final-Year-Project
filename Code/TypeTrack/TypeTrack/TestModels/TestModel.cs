@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace TypeTrack.TestModels
 {
@@ -40,6 +41,11 @@ namespace TypeTrack.TestModels
         {
             _test = test;
             _currentWord = _test.IndexOf(_test.FirstOrDefault());
+        }
+
+        public TestModel(JObject testObject) // construct a structure for the json file, and constructor
+        {
+
         }
 
 
