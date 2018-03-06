@@ -55,7 +55,15 @@ namespace TypeTrack.TestModels
         {
             if (!string.IsNullOrEmpty(fileName))
             {
-                //_testModel =
+                TestModel testModel;
+                if(TryGetTestModel(fileName, out testModel))
+                {
+                    _testModel = testModel;
+                }
+                else
+                {
+                    // Throw exception to be caught in error handler.
+                }
             }
         }
 
@@ -66,7 +74,7 @@ namespace TypeTrack.TestModels
             _testLocations = files.Select(p => p.Name).ToList();
         }
 
-        private bool TryGetTestModel(string fileLocation, out TestModel testModel)
+        private static bool TryGetTestModel(string fileLocation, out TestModel testModel)
         {
             bool found = false;
 
