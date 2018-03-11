@@ -13,7 +13,7 @@ namespace TypeTrack.TestModels
     {
         private TestModel _testModel;
         private List<string> _testLocations;
-        private DirectoryInfo _dInfo = new DirectoryInfo(@"\\SampleTexts");
+        private DirectoryInfo _dInfo = new DirectoryInfo(@"\SampleTexts");
 
         public TestManager() // @TODO: Need to edit this so that it allows the user to pre-load a test. 
         {
