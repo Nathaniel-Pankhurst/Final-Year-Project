@@ -47,7 +47,7 @@ namespace TypeTrack.TestModels
             }
             else
             {
-                throw new NullReferenceException();
+                throw new NullReferenceException(); //@TODO: create a specific exception handler here
             }
         }
 
@@ -78,7 +78,7 @@ namespace TypeTrack.TestModels
         {
             bool found = false;
 
-            StreamReader file = File.OpenText(fileLocation);
+            StreamReader file = File.OpenText(fileLocation + ".json");
             JsonTextReader jsonFile = new JsonTextReader(file);
             JObject testObject = (JObject)JToken.ReadFrom(jsonFile);
             testModel = new SampleTestModel(testObject);

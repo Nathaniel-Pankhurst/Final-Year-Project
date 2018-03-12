@@ -26,7 +26,7 @@ namespace TypeTrack.Controllers
         public TestController(ITestManager testManager)
         {
             _testManager = testManager;
-            _testModel = new SampleTestModel(new List<string> {"The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dogs"});
+            _testModel = _testManager.StartNewTest("DefaultTexts\\Fox_Pangram"); //@todo: sort this out
             _testTimer = new Stopwatch();
             _testCompleted = false;
             _userEntryText = string.Empty;
