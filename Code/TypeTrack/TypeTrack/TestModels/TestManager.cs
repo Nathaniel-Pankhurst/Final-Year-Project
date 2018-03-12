@@ -65,6 +65,10 @@ namespace TypeTrack.TestModels
                     // Throw exception to be caught in error handler.
                 }
             }
+            else
+            {
+                RepeatTest();
+            }
         }
 
         public void RefreshTestList()

@@ -10,7 +10,6 @@ namespace TypeTrack.Controllers
 {
     public class TestController : ITestController
     {
-        private ITestModel _testModel;
         private ITestManager _testManager;
         private Stopwatch _testTimer;
         private bool _testCompleted;
@@ -26,7 +25,6 @@ namespace TypeTrack.Controllers
         public TestController(ITestManager testManager)
         {
             _testManager = testManager;
-            _testModel = _testManager.StartNewTest("DefaultTexts\\Fox_Pangram"); //@todo: sort this out
             _testTimer = new Stopwatch();
             _testCompleted = false;
             _userEntryText = string.Empty;
@@ -34,12 +32,12 @@ namespace TypeTrack.Controllers
             _userProgressing = false;
         }
 
-        public async void StartNewTest() // @TODO: Make this asynchronous
+        public async void StartNewTest(string fileName = "") // @TODO: Make this asynchronous
         {
             _testCompleted = false;
             _completedWords = 0;
             _testTimer.Restart();
-            _testModel.StartNewTest();
+            _testManager.StartNewTest();
             NewTest.Invoke(this, new WordEventArgs(_testModel.GetRemainingWords()));
 
             await Task.Run(async () => RunTest());
@@ -52,12 +50,12 @@ namespace TypeTrack.Controllers
 
         private void ProgressWord()
         {
-            if (!_testModel.IsLastWord())
+            if (!_testManager.IsLastWord())
             {
                 _userEntryText = string.Empty;
-                _testModel.GetNextWord();
+                _testManager.AdvanceWord();
                 _completedWords += 1;
-                NextWord.Invoke(this, new WordEventArgs(_testModel.GetRemainingWords()));
+                NextWord.Invoke(this, new WordEventArgs(_testManager.GetRemainingWords()));
             }
             else
             {
@@ -83,7 +81,7 @@ namespace TypeTrack.Controllers
                     if (_userProgressing)
                     {
                         _userProgressing = false;
-                        if (_userEntryText == _testModel.GetCurrentWord())
+                        if (_userEntryText == _testManager.GetCurrentWord())
                         {
                             ProgressWord();
                         }
