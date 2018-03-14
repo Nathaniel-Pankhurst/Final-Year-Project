@@ -135,7 +135,7 @@ namespace TypeTrack
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            _testController.StartNewTest("DefaultTexts\\Fox_Pangram");
+            _testController.StartNewTest();
         }
     }
 }
