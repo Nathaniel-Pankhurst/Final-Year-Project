@@ -106,8 +106,8 @@ namespace TypeTrack.Controllers
 
         private int GetWPM()
         {
-            int elapsedTime = (int)_testTimer.Elapsed.TotalSeconds / 60;
-            return _completedWords / (elapsedTime != 0 ? elapsedTime : 1);
+            double elapsedTime = _testTimer.Elapsed.TotalSeconds / 60;
+            return (int)(_completedWords / (elapsedTime != 0 ? elapsedTime : 1));
         }
 
         public TestTelemetry GetCurrentTelemetry()
