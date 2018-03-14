@@ -16,5 +16,7 @@ namespace TypeTrack.TestModels
         void RepeatTest();
         void StartNewTest(string fileName = "");
         void RefreshTestList();
+        string GetRemainingWords();
+        
     }
 }

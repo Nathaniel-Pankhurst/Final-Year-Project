@@ -67,7 +67,7 @@ namespace TypeTrack.Controllers
         event TestEndHandler TestEnd;
         event MistakeHandler MistakeMade;
 
-        void StartNewTest();
+        void StartNewTest(string fileName = "");
         void UserProgress();
         void UpdateUserEntryText(string newEntrytes);
         TestTelemetry GetCurrentTelemetry();

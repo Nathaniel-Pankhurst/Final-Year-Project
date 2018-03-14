@@ -53,9 +53,9 @@ namespace TypeTrack.TestModels
 
         public void StartNewTest(string fileName = "")
         {
+                TestModel testModel;
             if (!string.IsNullOrEmpty(fileName))
             {
-                TestModel testModel;
                 if(TryGetTestModel(fileName, out testModel))
                 {
                     _testModel = testModel;
@@ -67,7 +67,13 @@ namespace TypeTrack.TestModels
             }
             else
             {
-                RepeatTest();
+                var rand = new Random();
+                string randomTestLocation = _testLocations[rand.Next(_testLocations.Count)];
+                
+                if(TryGetTestModel(randomTestLocation, out testModel))
+                {
+
+                }
             }
         }
 
@@ -76,6 +82,20 @@ namespace TypeTrack.TestModels
             FileInfo[] files = _dInfo.GetFiles("*.json");
 
             _testLocations = files.Select(p => p.Name).ToList();
+        }
+
+        public string GetRemainingWords()
+        {
+            if(_testModel != null)
+            {
+                return _testModel.GetRemainingWords();
+            }
+            else
+            {
+                // throw an exception here
+            }
+
+            return string.Empty;
         }
 
         private static bool TryGetTestModel(string fileLocation, out TestModel testModel)

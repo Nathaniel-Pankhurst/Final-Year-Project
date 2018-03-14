@@ -38,7 +38,7 @@ namespace TypeTrack.Controllers
             _completedWords = 0;
             _testTimer.Restart();
             _testManager.StartNewTest();
-            NewTest.Invoke(this, new WordEventArgs(_testModel.GetRemainingWords()));
+            NewTest.Invoke(this, new WordEventArgs(_testManager.GetRemainingWords()));
 
             await Task.Run(async () => RunTest());
         }
