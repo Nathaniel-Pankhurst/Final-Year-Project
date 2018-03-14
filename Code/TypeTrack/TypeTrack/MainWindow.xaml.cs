@@ -13,8 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-
 using TypeTrack.Controllers;
+using TypeTrack.TestModels;
 
 namespace TypeTrack
 {
@@ -23,7 +23,8 @@ namespace TypeTrack
     /// </summary>
     public partial class MainWindow : Window
     {
-        private TestController _testController;
+        private ITestController _testController;
+        private ITestManager _testManager;
         private DispatcherTimer _UpdateTimer = new DispatcherTimer();
         private string _testString = string.Empty;
         private bool _clearEntryBox = false;
@@ -41,7 +42,8 @@ namespace TypeTrack
             StartButton.Click += StartButton_Click;
             SettingsButton.Click += SettingsButton_Click;
 
-            _testController = new TestController();
+            _testManager = new TestManager();
+            _testController = new TestController(_testManager);
             _testController.NextWord += _testController_NextWord;
             _testController.NewTest += _testController_NewTest;
             _testController.TestEnd += _testController_TestEnd;

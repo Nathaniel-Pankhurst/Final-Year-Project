@@ -10,7 +10,7 @@ namespace TypeTrack.Controllers
 {
     public class TestController : ITestController
     {
-        private ITestModel _testModel;
+        private ITestManager _testManager;
         private Stopwatch _testTimer;
         private bool _testCompleted;
         private bool _userProgressing;
@@ -22,9 +22,9 @@ namespace TypeTrack.Controllers
         public event TestEndHandler TestEnd;
         public event MistakeHandler MistakeMade;
         
-        public TestController()
+        public TestController(ITestManager testManager)
         {
-            _testModel = new SampleTestModel(new List<string> {"The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dogs"});
+            _testManager = testManager;
             _testTimer = new Stopwatch();
             _testCompleted = false;
             _userEntryText = string.Empty;
@@ -32,13 +32,13 @@ namespace TypeTrack.Controllers
             _userProgressing = false;
         }
 
-        public async void StartNewTest() // @TODO: Make this asynchronous
+        public async void StartNewTest(string fileName = "") // @TODO: Make this asynchronous
         {
             _testCompleted = false;
             _completedWords = 0;
             _testTimer.Restart();
-            _testModel.StartNewTest();
-            NewTest.Invoke(this, new WordEventArgs(_testModel.GetRemainingWords()));
+            _testManager.StartNewTest();
+            NewTest.Invoke(this, new WordEventArgs(_testManager.GetRemainingWords()));
 
             await Task.Run(async () => RunTest());
         }
@@ -50,12 +50,12 @@ namespace TypeTrack.Controllers
 
         private void ProgressWord()
         {
-            if (!_testModel.IsLastWord())
+            if (!_testManager.IsLastWord())
             {
                 _userEntryText = string.Empty;
-                _testModel.GetNextWord();
+                _testManager.AdvanceWord();
                 _completedWords += 1;
-                NextWord.Invoke(this, new WordEventArgs(_testModel.GetRemainingWords()));
+                NextWord.Invoke(this, new WordEventArgs(_testManager.GetRemainingWords()));
             }
             else
             {
@@ -81,7 +81,7 @@ namespace TypeTrack.Controllers
                     if (_userProgressing)
                     {
                         _userProgressing = false;
-                        if (_userEntryText == _testModel.GetCurrentWord())
+                        if (_userEntryText == _testManager.GetCurrentWord())
                         {
                             ProgressWord();
                         }
@@ -106,8 +106,8 @@ namespace TypeTrack.Controllers
 
         private int GetWPM()
         {
-            int elapsedTime = (int)_testTimer.Elapsed.TotalSeconds / 60;
-            return _completedWords / (elapsedTime != 0 ? elapsedTime : 1);
+            double elapsedTime = _testTimer.Elapsed.TotalSeconds / 60;
+            return (int)(_completedWords / (elapsedTime != 0 ? elapsedTime : 1));
         }
 
         public TestTelemetry GetCurrentTelemetry()

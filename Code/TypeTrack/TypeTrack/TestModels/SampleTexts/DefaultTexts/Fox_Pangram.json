@@ -1,0 +1,5 @@
+﻿{
+  "Name": "Fox Pangram",
+  "TestType": "Sample",
+  "Test": [ "The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dogs" ]
+}

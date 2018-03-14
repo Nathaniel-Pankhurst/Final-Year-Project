@@ -62,7 +62,14 @@ namespace TypeTrack.Controllers
  
     public interface ITestController
     {
-        void StartNewTest();
+        event NextWordHandler NextWord;
+        event NewTestHandler NewTest;
+        event TestEndHandler TestEnd;
+        event MistakeHandler MistakeMade;
+
+        void StartNewTest(string fileName = "");
         void UserProgress();
+        void UpdateUserEntryText(string newEntrytes);
+        TestTelemetry GetCurrentTelemetry();
     }
 }

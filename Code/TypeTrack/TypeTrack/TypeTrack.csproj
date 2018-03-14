@@ -73,6 +73,8 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\ITestController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="TestModels\TestManager.cs" />
+    <Compile Include="TestModels\ITestManager.cs" />
     <Compile Include="TestModels\ITestModel.cs" />
     <Compile Include="TestModels\IUserModel.cs" />
     <Compile Include="TestModels\SampleTestModel.cs" />
@@ -116,6 +118,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="TestModels\SampleTexts\DefaultTexts\Fox_Pangram.json" />
+    <None Include="TestModels\SampleTexts\DefaultTexts\OscarWild.json" />
+    <None Include="TestModels\SampleTexts\DefaultTexts\PSA.md" />
+    <None Include="TestModels\SampleTexts\DefaultTexts\Risk.json" />
+    <None Include="TestModels\SampleTexts\UserTexts\PSA.md" />
     <None Include="Tobii\API-Reference.pdf" />
     <None Include="Tobii\SDK-License.pdf" />
   </ItemGroup>

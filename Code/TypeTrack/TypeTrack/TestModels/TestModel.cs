@@ -3,14 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace TypeTrack.TestModels
 {
     public abstract class TestModel : ITestModel
     {
+        protected string _testName;
         protected List<string> _test;
         protected int _currentWord;
         protected TestType _testType;
+
+        public string TestName
+        {
+            get
+            {
+                return _testName;
+            }
+        }
 
         public List<string> Test
         {
@@ -40,6 +50,11 @@ namespace TypeTrack.TestModels
         {
             _test = test;
             _currentWord = _test.IndexOf(_test.FirstOrDefault());
+        }
+
+        public TestModel(JObject testObject)
+        {
+            _testType = (TestType)Enum.Parse(typeof(TestType), (string)testObject["TestType"]);
         }
 
 
