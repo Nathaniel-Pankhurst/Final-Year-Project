@@ -69,7 +69,7 @@ namespace TypeTrack.Controllers
 
         void StartNewTest(string fileName = "");
         void UserProgress();
-        void UpdateUserEntryText(string newEntrytes);
+        void UpdateUserEntryText(string newEntryText);
         TestTelemetry GetCurrentTelemetry();
     }
 }
