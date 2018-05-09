@@ -45,7 +45,10 @@ namespace TypeTrack.Controllers
 
         public void UserProgress()
         {
-            _userProgressing = true;
+            if (!_userProgressing)
+            {
+                _userProgressing = true;
+            }
         }
 
         private void ProgressWord()
